@@ -3,8 +3,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Load data
+# Judul dashboard
+st.title("Bike Sharing Dashboard")
+
+# Load dataset
 bike_data = pd.read_csv('https://raw.githubusercontent.com/dzuura/Bike-Sharing_Data-Analysis/main/dashboard/bike_data.csv')
+
+# Map weekday
+days_of_week = {0: 'Senin', 1: 'Selasa', 2: 'Rabu', 3: 'Kamis', 4: 'Jumat', 5: 'Sabtu', 6: 'Minggu'}
+bike_data['weekday_hour'] = bike_data['weekday_hour'].map(days_of_week)
 
 # Sidebar filters
 st.sidebar.header("Filter Data")
@@ -19,7 +26,7 @@ filtered_data = bike_data[
     (bike_data['workingday_hour'] == selected_workingday)
 ]
 
-# 1. Penyewaan Sepeda Berdasarkan Hari dalam Seminggu
+# Visualisasi Penyewaan Sepeda Berdasarkan Hari dalam Seminggu
 st.subheader("Penyewaan Sepeda Berdasarkan Hari dalam Seminggu")
 rentals_by_day = bike_data.groupby('weekday_hour')['count_day'].mean()
 
@@ -31,7 +38,7 @@ plt.title('Rata-rata Penyewaan Sepeda per Hari', fontsize=14, fontweight='bold')
 plt.xticks(rotation=45)
 st.pyplot(plt)
 
-# 2. Tren Penyewaan Sepeda Berdasarkan Musim
+# Visualisasi Tren Penyewaan Sepeda Berdasarkan Musim
 st.subheader("Tren Penyewaan Sepeda Berdasarkan Musim")
 rentals_by_season = bike_data.groupby('season_hour')['count_day'].mean()
 
@@ -45,7 +52,7 @@ plt.title('Rata-rata Penyewaan Sepeda per Musim', fontsize=14, fontweight='bold'
 plt.grid(axis='y', linestyle='--')
 st.pyplot(plt)
 
-# 3. Pengaruh Hari Kerja terhadap Penyewaan Sepeda
+# Visualisasi Pengaruh Hari Kerja terhadap Penyewaan Sepeda
 st.subheader("Pengaruh Hari Kerja terhadap Penyewaan Sepeda")
 rentals_by_workingday = bike_data.groupby('workingday_hour')['count_day'].mean()
 
