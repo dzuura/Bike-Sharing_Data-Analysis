@@ -7,7 +7,7 @@ import seaborn as sns
 st.title("Bike Sharing Dashboard")
 
 # Load dataset
-final_df = pd.read_csv('https://github.com/dzuura/Bike-Sharing_Data-Analysis/blob/main/dashboard/final_df.csv')
+final_df = pd.read_csv('https://raw.githubusercontent.com/dzuura/Bike-Sharing_Data-Analysis/main/dashboard/final_df.csv')
 
 # Mapping hari
 days_of_week = {0: 'Senin', 1: 'Selasa', 2: 'Rabu', 3: 'Kamis', 4: 'Jumat', 5: 'Sabtu', 6: 'Minggu'}
